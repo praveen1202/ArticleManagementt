@@ -11,7 +11,12 @@
 //
 $.ajax({
     type:"GET",
-    url:"content"
+    url:"content",
+    dataType:"json",
+    success: function (data){
+        console.log(data);
+        $(".show").text(data);
+    }
 })
 
 

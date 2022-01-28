@@ -1,6 +1,7 @@
 package com.praveen.articlemanagement;
 
 import java.sql.*;
+import org.json.*;
 
 public class ReadData {
     public static int showArticles() throws Exception{
@@ -11,15 +12,28 @@ public class ReadData {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
             String query = "SELECT article_id,content,views,user_id,created FROM articles WHERE type='FREE' ORDER BY created DESC LIMIT 5";
             PreparedStatement stmt = con.prepareStatement(query);
-
+            JSONObject obj = new JSONObject();
             ResultSet rs = stmt.executeQuery();
 
             while(rs.next()){
+
                 article_id = rs.getInt(1);
                 content = rs.getString(2);
                 views = rs.getInt(3);
                 user_id = rs.getInt(4);
-                created = rs.getString(5);   //have to complete goes to global which has article array
+                created = rs.getString(5);
+
+                obj.put("article_id",article_id);
+                obj.put("content",content);
+                obj.put("views",views);
+                obj.put("user_id",user_id);
+                obj.put("created",created);
+
+                JSONObject copyObj = new JSONObject(obj.toString());            //deep copies the json object obj into copyObj to avoid discrepancies over storing json object in json array
+                Global.jArray.put(copyObj);
+                obj.clear();
+
+
                 Global.articles[index] =  new Article(article_id,content,views,user_id,created);
                 index++;
                 count++;
