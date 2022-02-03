@@ -4,9 +4,9 @@ import java.sql.*;
 import org.json.*;
 
 public class ReadData {
-    public static int showArticles() throws Exception{
+    public static void showArticles() throws Exception{
         try {
-            int article_id,views,user_id,count = 0,index = 0;
+            int article_id,views,user_id;
             String content,created;
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
@@ -32,16 +32,40 @@ public class ReadData {
                 JSONObject copyObj = new JSONObject(obj.toString());            //deep copies the json object obj into copyObj to avoid discrepancies over storing json object in json array
                 Global.jArray.put(copyObj);
                 obj.clear();
-
-
-                Global.articles[index] =  new Article(article_id,content,views,user_id,created);
-                index++;
-                count++;
             }
-            return count;
         }
         catch (Exception e){
             e.printStackTrace();
+            throw new Exception();
+        }
+    }
+
+    public static void searchUser(String username,String password) throws Exception{
+        try{
+            int user_id;
+            String premium;
+            JSONObject obj = new JSONObject();
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            String query = "SELECT user_id,premium FROM user WHERE username = ? AND password = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1,username);
+            stmt.setString(2,password);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                user_id = rs.getInt(1);
+                premium = rs.getString(2);
+
+                obj.put("user_id",user_id);
+                obj.put("premium",premium);
+                Global.jObj = obj;
+            }
+        }
+        catch (Exception e){
+            System.out.println(e);
             throw new Exception();
         }
     }

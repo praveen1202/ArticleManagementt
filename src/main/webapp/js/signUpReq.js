@@ -1,34 +1,23 @@
-// document.querySelector(".signUp").classList.add("invisible");
-// document.querySelector(".sign").addEventListener("click",enable);
-//
-// function enable(){
-//     document.querySelector(".signUp").classList.remove("invisible");
-//
-//     document.querySelector(".sign").classList.add("invisible");
-// }
-//
-//
-//
-$.ajax({
+$.ajax({        //ajax for content-load(latest)
     type:"GET",
     url:"content",
     dataType:"json",
     success: function (data){
-        console.log(data);
-        $(".show").text(data);
+        for(let iter = 0; iter < data.length; iter++){
+            // console.log(data[iter].content);
+            $(".show").text(data[iter].content);
+        }
+        // console.log(data);
     }
 })
 
-
-$(".signUp").hide();
-// // document.querySelector(".signUp").style.display = "none";
-// // document.querySelector(".sign").addEventListener("click",enable);
-// $(".sign").click(function (){
-//     $(".signUp").show();
-//     $(this).hide();
-// });
-//
-$("#sign-submit").click(function (){
+//sign-up form ajax request (have to take care of password validation
+$("form.form-signup").submit(function (form){
+    form.preventDefault();     //prevent the actual submission of form
+    if ($("#sign-password-1").val() !== $("#sign-password-2").val()){
+        alert("Password Mismatch");
+        return false;
+    }
     let ajax = $.ajax({
         type:"POST",
         url:"sign-up",
@@ -36,34 +25,63 @@ $("#sign-submit").click(function (){
         dataType:"json",
         success: function (data){
             console.log(data);
-            $(".show").text(data);
+            if(data.status === 'success'){
+                alert("Signed Up Successfully!");
+                // $(".sign-up").remove();
+            }
+            else{
+                alert("Username already exists");
+            }
+
         },
-        error: function (data){
-            console.log(data);
+        error: function (){
+            alert("Error! Try Again!");
         }
     });
-    ajax.done(function (data){
-            console.log(JSON.parse(data));
-            $(".show").text(data);
-        });
-    console.log("status");
+    ajax.done(function (){
+
+    })
+
 });
 
-$(".sample").click(function (event){
-    console.log(event);
-    $.ajax({
+//login form request
+$("form.form-login").submit(function (form){
+    form.preventDefault();
+    let ajax = $.ajax({
         type:"GET",
-        url: "sample",
-        dataType:"json",
+        url:"log-in",
+        data: $("form.form-login").serialize(),
+        dataType: "json",
         success: function (data){
-            console.log(data);
-        },
-        error: function (data){
-            console.log(data);
+            if(data.status === 'success'){
+                alert("Logged In Successfully!");
+                console.log(data);
+                $(".log-in").remove();
+            }
+            else{
+                alert("Incorrect Password/Username");
+            }
         }
     });
+    ajax.done(function (){
+
+    });
 });
+
+
+$(".log-in").hide();
+$(".sign-up").hide();
+
+//log-in toggle button
+
+$(".log").click(function (){
+    $(".sign-up").hide();
+    $(".log-in").toggle();
+});
+
+//Sign-up toggle button
 
 $(".sign").click(function (){
-    $(".signUp").toggle();
-})
+    $(".log-in").hide();
+    $(".sign-up").toggle();
+});

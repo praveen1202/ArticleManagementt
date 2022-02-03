@@ -12,10 +12,11 @@ public class Content extends HttpServlet{
         PrintWriter out = res.getWriter();
 
         try{
-            int count = ReadData.showArticles();
-            System.out.println(Global.jArray);
+            ReadData.showArticles();
+//            System.out.println(Global.jArray);
             out.write(Global.jArray.toString());
             Global.jArray.clear();
+//            System.out.println(Global.jArray);
         }
         catch (Exception e){
             System.out.println(e);

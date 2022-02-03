@@ -10,19 +10,30 @@
 <%--<h1><%= "Hello World!" %>--%>
 <%--</h1>--%>
 <br/>
-<button class="sample">Hello</button>
+<button class="log">Log In</button>
 <button class="sign">Sign Up</button>
-<div class="signUp">
-    <form class="form-signup" method="post">
-        <label>Enter Username : <input id="username" type="text" name="username" required></label>
+<div class="sign-up">
+    <form class="form-signup" method="post" enctype="application/x-www-form-urlencoded">
+        <label>Enter Username : <input type="text" name="sign-username" required></label>
         <br/>
-        <label>Enter Password : <input id="password1" type="text" name="password1" required></label>
+        <label>Enter Password : <input id="sign-password-1" type="text" name="sign-password-1" required></label>
         <br/>
-        <label>Re-Enter Password : <input id="password2" type="text" name="password2" required></label>
+        <label>Re-Enter Password : <input id="sign-password-2" type="text" name="sign-password-2" required></label>
         <br/>
-        <input type="submit" name="Sign Up" id="sign-submit">
+        <input type="submit" value="Sign Up">
     </form>
 </div>
+
+<div class="log-in">
+    <form class="form-login" method="get" enctype="application/x-www-form-urlencoded">
+        <label>Enter Username : <input type="text" name="log-username" required></label>
+        <br/>
+        <label>Enter Password : <input type="password" name="log-password" required></label>
+        <br/>
+        <input type="submit" value="Log In">
+    </form>
+</div>
+
 <div class="show"></div>
 <a href="hello-servlet">Hello Servlet</a>
 <script src="js/signUpReq.js"></script>
