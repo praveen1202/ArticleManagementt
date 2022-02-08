@@ -15,12 +15,19 @@ public class LogIn extends HttpServlet{
         PrintWriter out = res.getWriter();
 
         try{
+
             ReadData.searchUser(username,password);
+
             Global.jObj.put("status","success");
             out.write(Global.jObj.toString());
+
+            HttpSession session = req.getSession();
+            session.setAttribute("name",username);
+
             Global.jObj.clear();
         }
         catch (Exception e){
+
             System.out.println(e);
             Global.jObj.put("status","failure");
             out.write(Global.jObj.toString());
