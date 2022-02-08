@@ -8,7 +8,7 @@ public class ReadData {
         try {
             int article_id,views,user_id;
             String content,created;
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
             String query = "SELECT article_id,content,views,user_id,created FROM articles WHERE type='FREE' ORDER BY created DESC LIMIT 5";
             PreparedStatement stmt = con.prepareStatement(query);
@@ -46,7 +46,7 @@ public class ReadData {
             String premium;
             JSONObject obj = new JSONObject();
 
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
             String query = "SELECT user_id,premium FROM user WHERE username = ? AND password = ?";
 
