@@ -19,8 +19,13 @@
                 <input type="text" name="title" /><br/>
                 <label for="create-content">Write Your Thoughts: </label>
                 <textarea name="content" id="create-content" rows="10" cols="40"></textarea>
-                <label>Premium Content:<input class="content-type" type="checkbox" name="premium" value="YES" checked></label>
-                <input id="create-article-submit" type="submit">
+                <label>Premium Content:</label>
+                <input type="radio" name="premium" value="YES">
+                <label>Yes</label>
+                <input type="radio" name="premium" value="NO" checked>
+                <label>No</label>
+                <input type="hidden" name="created" id="date-time">
+                <input type="submit">
             </form>
         </div>
 

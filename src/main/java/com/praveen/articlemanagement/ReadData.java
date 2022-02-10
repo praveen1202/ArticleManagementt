@@ -70,4 +70,26 @@ public class ReadData {
         }
     }
 
+    public static int getArticleId() throws Exception {
+        try{
+            int article_id = 0;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            String query = "SELECT MAX(article_id) FROM articles";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                article_id = rs.getInt(1);
+            }
+            return ++article_id;
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            throw new Exception();
+        }
+
+    }
+
 }

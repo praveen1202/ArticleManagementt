@@ -23,6 +23,7 @@ public class LogIn extends HttpServlet{
 
             HttpSession session = req.getSession();
             session.setAttribute("name",username);
+            session.setAttribute("user_id",Global.jObj.get("user_id"));
 
             Global.jObj.clear();
         }
