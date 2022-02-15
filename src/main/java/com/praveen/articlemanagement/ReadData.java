@@ -4,7 +4,7 @@ import java.sql.*;
 import org.json.*;
 
 public class ReadData {
-    public static void showArticles() throws Exception{
+    public static void showArticles() throws Exception{     //shows article from database
         try {
             int article_id,views,user_id;
             String content,created;
@@ -40,7 +40,7 @@ public class ReadData {
         }
     }
 
-    public static void searchUser(String username,String password) throws Exception{
+    public static void searchUser(String username,String password) throws Exception{    //function for logging in
         try{
             int user_id;
             String premium;
@@ -70,7 +70,7 @@ public class ReadData {
         }
     }
 
-    public static int getArticleId() throws Exception {
+    public static int getArticleId() throws Exception {     //function to get the highest article_id so that it is unique from others
         try{
             int article_id = 0;
             Class.forName("com.mysql.cj.jdbc.Driver");

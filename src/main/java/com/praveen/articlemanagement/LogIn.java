@@ -16,12 +16,12 @@ public class LogIn extends HttpServlet{
 
         try{
 
-            ReadData.searchUser(username,password);
+            ReadData.searchUser(username,password);         //searches if username and password matches in the database
 
             Global.jObj.put("status","success");
             out.write(Global.jObj.toString());
 
-            HttpSession session = req.getSession();
+            HttpSession session = req.getSession();         //creates session
             session.setAttribute("name",username);
             session.setAttribute("user_id",Global.jObj.get("user_id"));
 

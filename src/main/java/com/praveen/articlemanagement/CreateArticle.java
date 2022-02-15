@@ -12,7 +12,7 @@ public class CreateArticle extends HttpServlet {
         int user_id = Integer.parseInt(session.getAttribute("user_id").toString());
 
 
-        String content = req.getParameter("title") + "....." + req.getParameter("content");
+        String content = req.getParameter("title") + "....." + req.getParameter("content");         //'.....' is for separating topic and content
         String premium = req.getParameter("premium");
         String created = req.getParameter("created");
         String type;
@@ -24,7 +24,7 @@ public class CreateArticle extends HttpServlet {
             type = "FREE";
         }
         try {
-            WriteData.createArticle(user_id,content,created,type);
+            WriteData.createArticle(user_id,content,created,type);  //creates the article and store it in the database
         }
         catch (Exception e) {
             System.out.println(e);

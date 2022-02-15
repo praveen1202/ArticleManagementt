@@ -17,12 +17,11 @@ public class SignUp extends HttpServlet{
         String username = req.getParameter("sign-username");
         String password = req.getParameter("sign-password-1");
         JSONObject object = new JSONObject();
-//        System.out.println(username);
-//        System.out.println(password);
+
         PrintWriter out = res.getWriter();
 
         try{
-            WriteData.signUp(username,password);
+            WriteData.signUp(username,password);    //creates user
             object.put("status","success");
         }
         catch (Exception e){

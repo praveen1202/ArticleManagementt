@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>JSP - Hello World</title>
+        <title>JSP</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="css/styles.css">
         <script src="js/login.js" defer></script>
@@ -10,9 +10,9 @@
     </head>
     <body>
         <h2 class="session">${name}</h2>
-        <input id="session-name" type="hidden" value="${name}">
+        <input id="session-name" type="hidden" value="${name}">         <%--  checks if user is logged in or not and changes js files accordingly  --%>
         <br/>
-        <div id="form-entry">
+        <div id="form-entry">       <%--  login and signup forms  --%>
             <button class="log">Log In</button>
             <button class="sign">Sign Up</button>
             <div class="sign-up"> <%-- signup div --%>
@@ -44,6 +44,9 @@
             </form>
         </div>
 
+        <div class="article">       <%-- create Article div --%>
+            <a href="create-article.jsp">Create Article</a>
+        </div>
 
         <div class="show"></div>
 

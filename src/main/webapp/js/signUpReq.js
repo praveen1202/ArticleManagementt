@@ -3,17 +3,18 @@ $.ajax({        //ajax for content-load(latest)
     url:"content",
     dataType:"json",
     success: function (data){
-        for(let iter = 0; iter < data.length; iter++){
-            // console.log(data[iter].content);
-            $(".show").text(data[iter].content);
-        }
         // console.log(data);
+        for(let iter = 0; iter < data.length; iter++){     //adds content dynamically to the page
+            let $article = $("<p>");
+            $article.text(data[iter].content);
+            $(".show").append($article);
+        }
     }
 })
 
-if($("#session-name").val() === ''){
+if($("#session-name").val() === ''){        //if user is not logged in
 
-    $(".log-out").hide();
+    $(".log-out").hide();       //temporarily hide logout button,have to remove it
 //sign-up form ajax request (have to take care of password validation
 
     $("form.form-signup").submit(function (form){
@@ -22,7 +23,7 @@ if($("#session-name").val() === ''){
             alert("Password Mismatch");
             return false;
         }
-        let ajax = $.ajax({
+        let ajax = $.ajax({     //submit signup form through ajax req
             type:"POST",
             url:"sign-up",
             data: $('form.form-signup').serialize(),
@@ -52,7 +53,7 @@ if($("#session-name").val() === ''){
 //login form request
     $("form.form-login").submit(function (form){
         form.preventDefault();
-        let ajax = $.ajax({
+        let ajax = $.ajax({     //ajax req for login
             type:"GET",
             url:"log-in",
             data: $("form.form-login").serialize(),

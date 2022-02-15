@@ -21,18 +21,11 @@ function getDateTime(){                             //function to get dateTime
     return x.today() + " " + x.timeNow();
 }
 
-function contentType(query)
-{
-    $(query).attr('value', query.checked ? "YES" : "NO");
-}
-
 $("#create-article").submit(function (form){
     // let $dateTime = $("<input>",{"type": "hidden","name":"date-time"}); //example of how to create html element in jQuery
     $("#date-time").val(getDateTime());
-    // contentType($("#content-type"));
     form.preventDefault();
-    console.log($("#create-article").serialize());
-    $.ajax({
+    $.ajax({   //ajax req for creating new article
         type:"POST",
         data: $("#create-article").serialize(),
         url:"create-article"

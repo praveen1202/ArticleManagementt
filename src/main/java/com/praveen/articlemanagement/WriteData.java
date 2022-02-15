@@ -3,7 +3,7 @@ package com.praveen.articlemanagement;
 import java.sql.*;
 
 public class WriteData {
-    public static void signUp(String username,String password) throws Exception{
+    public static void signUp(String username,String password) throws Exception{    //signs up the user
         try {
 //            System.out.println(username + " " + password);
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -21,7 +21,7 @@ public class WriteData {
         }
     }
 
-    public static void createArticle(int user_id,String content,String created,String type) throws Exception {
+    public static void createArticle(int user_id,String content,String created,String type) throws Exception {  //creates article
         try{
             int article_id = ReadData.getArticleId();
 
