@@ -5,7 +5,7 @@
          version="5.0">
     <servlet>
         <servlet-name>readArticle</servlet-name>
-        <servlet-class>com.praveen.articlemanagement.ArticleId</servlet-class>  //servlet class
+        <servlet-class>com.praveen.articlemanagement.ArticleIdServlet</servlet-class>  //servlet class
     </servlet>
     <servlet-mapping>
         <servlet-name>readArticle</servlet-name>

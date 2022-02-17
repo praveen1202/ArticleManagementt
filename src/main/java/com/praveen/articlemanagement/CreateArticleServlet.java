@@ -4,7 +4,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 @WebServlet(name = "createArticle", value = "/create-article")
-public class CreateArticle extends HttpServlet {
+public class CreateArticleServlet extends HttpServlet {
     public void doPost(HttpServletRequest req,HttpServletResponse res){
 
         HttpSession session = req.getSession();

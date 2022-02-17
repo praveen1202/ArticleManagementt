@@ -8,7 +8,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 @WebServlet(name="signUp",value="/sign-up")
-public class SignUp extends HttpServlet{
+public class SignUpServlet extends HttpServlet{
 
 //    @Override
 

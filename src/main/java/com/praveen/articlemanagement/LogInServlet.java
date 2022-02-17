@@ -8,7 +8,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 @WebServlet(name="logIn",value="/log-in")
-public class LogIn extends HttpServlet{
+public class LogInServlet extends HttpServlet{
     public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException {
 
         String username = req.getParameter("log-username");

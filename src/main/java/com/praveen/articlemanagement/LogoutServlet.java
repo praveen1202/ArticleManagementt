@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name="logOut",value="/log-out")
-public class Logout extends HttpServlet{
+public class LogoutServlet extends HttpServlet{
     public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException {
         HttpSession session = req.getSession();
         session.removeAttribute("name");        //removes attributes and invalidates the session

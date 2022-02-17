@@ -7,10 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Read Article</title>
-</head>
-<body>
-${article_id}
-</body>
+    <head>
+        <title>Read Article</title>
+        <link href="../../css/styles.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="../../js/readArticle.js" defer></script>
+    </head>
+    <body>
+        <input id="article_id" type="hidden" value="${article_id}">
+    </body>
 </html>

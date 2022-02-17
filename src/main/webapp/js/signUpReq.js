@@ -1,6 +1,6 @@
 $.ajax({        //ajax for content-load(latest)
     type:"GET",
-    url:"content",
+    url:"articles",
     dataType:"json",
     success: function (data){
         // console.log(data);
@@ -26,6 +26,7 @@ if($("#session-name").val() === ''){        //if user is not logged in
         form.preventDefault();     //prevent the actual submission of form
         if ($("#sign-password-1").val() !== $("#sign-password-2").val()){
             alert("Password Mismatch");
+            $("#form-signup").trigger("reset");
             return false;
         }
         $.ajax({     //submit signup form through ajax req
@@ -46,9 +47,6 @@ if($("#session-name").val() === ''){        //if user is not logged in
                 }
 
             },
-            error: function (){
-                alert("Error! Try Again!");
-            }
         });
     });
 

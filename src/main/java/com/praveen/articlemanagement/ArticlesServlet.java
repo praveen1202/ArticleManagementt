@@ -6,8 +6,8 @@ import org.json.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "content", value = "/content")
-public class Content extends HttpServlet{
+@WebServlet(name = "articles", value = "/articles")
+public class ArticlesServlet extends HttpServlet{
     public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException{
 
         PrintWriter out = res.getWriter();
