@@ -48,6 +48,11 @@
             <a href="create-article.jsp">Create Article</a>
         </div>
 
+<%--        <form action="http://localhost:8080/articleManagement/create-article.jsp">--%>
+<%--&lt;%&ndash;            <input type="hidden" value="hii" name="hi">&ndash;%&gt;--%>
+<%--            <input type="submit" value="Create Article">--%>
+<%--        </form>--%>
+
         <div class="show"></div>
 
     </body>

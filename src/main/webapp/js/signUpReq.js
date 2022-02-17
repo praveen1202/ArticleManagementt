@@ -5,12 +5,17 @@ $.ajax({        //ajax for content-load(latest)
     success: function (data){
         // console.log(data);
         for(let iter = 0; iter < data.length; iter++){     //adds content dynamically to the page
+            let $articleId = String(data[iter].article_id);
+
+            let $href = $("<a>");
+            $($href).attr("href","JSP/articleid/"+$articleId);
             let $article = $("<p>");
             $article.text(data[iter].content);
-            $(".show").append($article);
+            $($href).append($article);
+            $(".show").append($href);
         }
     }
-})
+});
 
 if($("#session-name").val() === ''){        //if user is not logged in
 

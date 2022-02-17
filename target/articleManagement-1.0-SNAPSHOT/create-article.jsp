@@ -14,7 +14,7 @@
         %>
 
         <div class="article-content">
-            <form action="CreateArticle" method="post" id="create-article">     //form for create article
+            <form action="CreateArticle" method="post" id="create-article">     <%--form for create article--%>
                 <h3>Title :</h3>
                 <input type="text" name="title" /><br/>
                 <label for="create-content">Write Your Thoughts: </label>

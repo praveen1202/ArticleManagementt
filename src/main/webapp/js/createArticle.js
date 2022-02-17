@@ -28,6 +28,13 @@ $("#create-article").submit(function (form){
     $.ajax({   //ajax req for creating new article
         type:"POST",
         data: $("#create-article").serialize(),
-        url:"create-article"
+        url:"create-article",
+        success: function (){
+            setInterval(redirect,5000);
+        }
     });
 });
+
+function redirect(){
+    window.location.href = "http://localhost:8080/articleManagement/index.jsp";         //redirects to home page after successful publish of article
+}
