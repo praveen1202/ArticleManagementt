@@ -25,8 +25,8 @@ public class SignUp extends HttpServlet{
             object.put("status","success");
         }
         catch (Exception e){
+            e.printStackTrace();
             object.put("status","failure");
-            System.out.println(object);
         }
         out.write(object.toString());
     }
