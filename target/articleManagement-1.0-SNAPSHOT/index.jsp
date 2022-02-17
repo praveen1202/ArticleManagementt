@@ -13,10 +13,10 @@
         <input id="session-name" type="hidden" value="${name}">         <%--  checks if user is logged in or not and changes js files accordingly  --%>
         <br/>
         <div id="form-entry">       <%--  login and signup forms  --%>
-            <button class="log">Log In</button>
-            <button class="sign">Sign Up</button>
+            <button class="log-button">Log In</button>
+            <button class="sign-button">Sign Up</button>
             <div class="sign-up"> <%-- signup div --%>
-                <form class="form-signup" method="post" enctype="application/x-www-form-urlencoded">
+                <form id="form-signup" method="post">
                     <label>Enter Username : <input type="text" name="sign-username" required></label>
                     <br/>
                     <label>Enter Password : <input id="sign-password-1" type="text" name="sign-password-1" required></label>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="log-in"> <%-- login div --%>
-                <form class="form-login" method="get" enctype="application/x-www-form-urlencoded">
+                <form id="form-login" method="post">
                     <label>Enter Username : <input type="text" name="log-username" required></label>
                     <br/>
                     <label>Enter Password : <input type="password" name="log-password" required></label>
@@ -47,11 +47,6 @@
         <div class="article">       <%-- create Article div --%>
             <a href="create-article.jsp">Create Article</a>
         </div>
-
-<%--        <form action="http://localhost:8080/articleManagement/create-article.jsp">--%>
-<%--&lt;%&ndash;            <input type="hidden" value="hii" name="hi">&ndash;%&gt;--%>
-<%--            <input type="submit" value="Create Article">--%>
-<%--        </form>--%>
 
         <div class="show"></div>
 
