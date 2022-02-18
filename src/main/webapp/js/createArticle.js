@@ -8,14 +8,6 @@ Date.prototype.timeNow = function () {
     return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
 }
 
-
-$("#time").click(function (){                       //sample for datetime ..to be deleted
-    let x = new Date();
-    let y = x.today() + " " + x.timeNow();
-    // console.log(y);
-    $("#get-time").html(y);
-});
-
 function getDateTime(){                             //function to get dateTime
     let x = new Date();
     return x.today() + " " + x.timeNow();
