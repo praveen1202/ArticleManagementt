@@ -17,7 +17,7 @@ public class ArticlesServlet extends HttpServlet{
             out.write(jArray.toString());     //output the res in json
         }
         catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }
