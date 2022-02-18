@@ -97,4 +97,53 @@ public class ReadData {
         }
 
     }
+
+    public static boolean searchArticle(int article_id){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            String query = "SELECT article_id FROM articles WHERE article_id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,article_id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                return true;
+            }
+            return false;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static JSONObject getArticle(int article_id) throws Exception {
+        try{
+            JSONObject jObject = new JSONObject();
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            String query = "SELECT content,views,user_id,created FROM articles WHERE article_id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,article_id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                jObject.put("content",rs.getString(1));
+                jObject.put("views",rs.getInt(2));
+                jObject.put("user_id",rs.getInt(3));
+                jObject.put("created",rs.getString(4));
+            }
+            return jObject;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new Exception();
+        }
+    }
 }
