@@ -14,6 +14,8 @@
         <script src="../../js/readArticle.js" defer></script>
     </head>
     <body>
-        <input id="article_id" type="hidden" name="article_id" value="${article_id}" >
+        <input id="article-id" type="hidden" name="article_id" value="${article_id}" >
+        <div id ="write-article">
+        </div>
     </body>
 </html>

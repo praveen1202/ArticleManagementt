@@ -44,8 +44,8 @@
             </form>
         </div>
 
-        <div class="article">       <%-- create Article div --%>
-            <a href="create-article.jsp">Create Article</a>
+        <div class="create-article">       <%-- create Article div --%>
+            <a href="JSP/create-article.jsp">Create Article</a>
         </div>
 
         <div class="show"></div>

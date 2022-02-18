@@ -3,19 +3,41 @@ $.ajax({        //ajax for content-load(latest)
     url:"articles",
     dataType:"json",
     success: function (data){
-        // console.log(data);
-        for(let iter = 0; iter < data.length; iter++){     //adds content dynamically to the page
-            let $articleId = String(data[iter].article_id);
-
-            let $href = $("<a>");
-            $($href).attr("href","JSP/articleid/"+$articleId);
-            let $article = $("<p>");
-            $article.text(data[iter].content);
-            $($href).append($article);
-            $(".show").append($href);
-        }
+        console.log(data);
+        arrangeArticles(data);
     }
 });
+
+function arrangeArticles(data){
+    for(let iter = 0; iter < data.length; iter++){     //adds content dynamically to the page
+        let $articleId = String(data[iter].article_id);
+        let $div = $("<div>");
+        $div.attr("id","article" + $articleId);
+
+        let $href = $("<a>");
+        $($href).attr("href","JSP/articleid/"+$articleId);
+
+        let contentArr = data[iter].content.split("#$%^&*");
+        let topic = contentArr[0],content = contentArr[1];
+
+        let $topic = $("<h3>");         //add classes to get styles
+        $topic.text(topic);
+        $($href).append($topic);
+
+        let $author = $("<h4>");
+        $author.text("Created by " + data[iter].username);
+        $($href).append($author);
+
+        let $article = $("<p>");
+        $article.text(content);
+        $($href).append($article);
+
+        $($div).append($href);
+        $(".show").append($div);
+    }
+}
+
+
 
 if($("#session-name").val() === ''){        //if user is not logged in
 
