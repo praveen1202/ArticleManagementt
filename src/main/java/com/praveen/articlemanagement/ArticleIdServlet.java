@@ -12,21 +12,21 @@ public class ArticleIdServlet extends HttpServlet {
         int article_id;
         String url = req.getRequestURL().toString();
         String[] arr = url.split("articleid/");
-//        System.out.println(arr.length + " " + url);
-//        System.out.println(Pattern.matches("[0-9]+",arr[1]));
+
         if(Pattern.matches("[0-9]+",arr[1])) {
-            try {
-                article_id = Integer.parseInt(arr[1]);
+            article_id = Integer.parseInt(arr[1]);
+            if(ReadData.searchArticle(article_id)){
                 req.setAttribute("article_id", article_id);
                 req.getRequestDispatcher("../read-article.jsp").forward(req, res);
-            } catch (Exception e) {
-                System.out.println(e + " outer try");
-                res.sendRedirect("../../index.jsp");
+            }
+            else{
+                res.sendRedirect("../../index.jsp");    //illegal call,have to raise error
             }
         }
-        else {
-            res.sendRedirect("../../index.jsp");
+        else{
+            res.sendRedirect("../../index.jsp");    //have to raise error
         }
+
 
     }
 }
