@@ -7,7 +7,7 @@ public class ReadData {
     public static JSONArray showArticles() throws Exception{     //shows article from database
         try {
             int article_id,views,user_id;
-            String content,created;
+            String content,created,username;
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
@@ -29,10 +29,12 @@ public class ReadData {
                 user_id = rs.getInt(4);
                 created = rs.getString(5);
 
+                username = ReadData.getUserName(user_id);
+
                 jObject.put("article_id",article_id);
                 jObject.put("content",content);
                 jObject.put("views",views);
-                jObject.put("user_id",user_id);
+                jObject.put("username",username);
                 jObject.put("created",created);
                 
                 jArray.put(jObject);
@@ -109,10 +111,7 @@ public class ReadData {
 
             ResultSet rs = stmt.executeQuery();
 
-            if(rs.next()){
-                return true;
-            }
-            return false;
+            return rs.next();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -140,6 +139,31 @@ public class ReadData {
                 jObject.put("created",rs.getString(4));
             }
             return jObject;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new Exception();
+        }
+    }
+
+    public static String getUserName(int user_id) throws Exception {
+        try {
+            String username;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            String query = "SELECT username FROM user WHERE user_id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,user_id);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                username = rs.getString(1);
+            }
+            else {
+                throw new Exception();
+            }
+            return username;
         }
         catch (Exception e){
             e.printStackTrace();
