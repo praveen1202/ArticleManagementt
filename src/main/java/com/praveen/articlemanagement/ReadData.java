@@ -135,7 +135,9 @@ public class ReadData {
             if(rs.next()){
                 jObject.put("content",rs.getString(1));
                 jObject.put("views",rs.getInt(2));
-                jObject.put("user_id",rs.getInt(3));
+
+
+                jObject.put("user_name",ReadData.getUserName(rs.getInt(3)));
                 jObject.put("created",rs.getString(4));
             }
             return jObject;

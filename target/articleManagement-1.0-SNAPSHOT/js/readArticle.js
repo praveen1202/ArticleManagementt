@@ -11,7 +11,7 @@ function structureArticle(data){
     $("#write-article").append($topic);
 
     let $author = $("<h3>");
-    $author.text("Created by " + data.user_id + " on " + data.created);
+    $author.text("Created by " + data.user_name + " on " + data.created);
     $("#write-article").append($author);
 
     let $content = $("<p>");
