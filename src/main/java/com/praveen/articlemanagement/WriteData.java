@@ -3,16 +3,17 @@ package com.praveen.articlemanagement;
 import java.sql.*;
 
 public class WriteData {
-    public static void signUp(String username,String password) throws Exception{    //signs up the user
+    public static void signUp(String username,String password,String email) throws Exception{    //signs up the user
         try {
 //            System.out.println(username + " " + password);
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
-            String query = "INSERT INTO user (username,password,premium) VALUES (?,?,'NO')";
+            String query = "INSERT INTO user (username,password,email_id,premium) VALUES (?,?,?,'NO')";
             PreparedStatement stmt = con.prepareStatement(query);
 
             stmt.setString(1,username);
             stmt.setString(2,password);
+            stmt.setString(3,email);
             stmt.execute();
         }
         catch (Exception e){

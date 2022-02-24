@@ -50,6 +50,7 @@
                     <br/>
                     <label>Re-Enter Password : <input id="sign-password-2" type="text" name="sign-password-2" required></label>
                     <br/>
+                    <label>Email Id : <input id="email-id" type="email" name="email-id" required></label>
                     <input type="submit" value="Sign Up">
                 </form>
             </div>

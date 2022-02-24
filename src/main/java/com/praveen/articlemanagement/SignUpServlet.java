@@ -16,12 +16,13 @@ public class SignUpServlet extends HttpServlet{
         res.setContentType("application/json");
         String username = req.getParameter("sign-username");
         String password = req.getParameter("sign-password-1");
+        String email = req.getParameter("email-id");
         JSONObject object = new JSONObject();
 
         PrintWriter out = res.getWriter();
 
         try{
-            WriteData.signUp(username,password);    //creates user
+            WriteData.signUp(username,password,email);    //creates user
             object.put("status","success");
         }
         catch (Exception e){
