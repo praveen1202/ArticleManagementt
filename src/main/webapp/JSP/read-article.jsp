@@ -22,7 +22,7 @@
         </div>
         <div id="user-activities">
             <button type="button" class="btn btn-white" id="like-button">
-                <i class="bi bi-hand-thumbs-up" id="like"></i> Like
+                <i class="bi bi-hand-thumbs-up" id="like"></i><span>Like</span>
             </button>
             <button type="button" class="btn btn-white">
                 <i class="bi bi-chat"></i> Comment

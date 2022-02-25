@@ -172,4 +172,56 @@ public class ReadData {
             throw new Exception();
         }
     }
+
+    protected static int getLikeId(int user_id,int article_id) throws Exception {
+        try{
+            int like_id = 0;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+
+            String query = "SELECT MAX(like_id) FROM article_like WHERE article_id = ? AND user_id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,article_id);
+            stmt.setInt(2,user_id);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                like_id = rs.getInt(1);
+            }
+            return ++like_id;
+
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new Exception();
+        }
+    }
+
+    protected static JSONObject getLikeInfo(int user_id,int article_id) throws Exception {
+        try{
+            JSONObject jObject = new JSONObject();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+
+            String query = "SELECT like_id FROM article_like WHERE user_id = ? AND article_id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,user_id);
+            stmt.setInt(2,article_id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                jObject.put("liked","yes");
+            }
+            else{
+                jObject.put("liked","no");
+            }
+            return jObject;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new Exception();
+        }
+    }
 }

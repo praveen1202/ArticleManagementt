@@ -12,8 +12,16 @@ public class ArticleInfoServlet extends HttpServlet{
         PrintWriter out = res.getWriter();
         try {
             int article_id = Integer.parseInt(req.getParameter("article_id"));
-            JSONObject jObject = ReadData.getArticle(article_id);
-            out.write(jObject.toString());
+            int user_id = Integer.parseInt(req.getParameter("user_id"));
+
+            JSONArray jArray = new JSONArray();
+
+            JSONObject jObject1 = ReadData.getArticle(article_id);
+            jArray.put(jObject1);
+            JSONObject jObject2 = ReadData.getLikeInfo(user_id,article_id);
+            jArray.put(jObject2);
+
+            out.write(jArray.toString());
 
         }
         catch (Exception e){

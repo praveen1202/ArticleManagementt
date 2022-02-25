@@ -44,4 +44,26 @@ public class WriteData {
             throw new Exception();
         }
     }
+
+    public static void likeArticle(int user_id,int article_id){
+        try{
+            int like_id = ReadData.getLikeId(user_id,article_id);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            String query = "INSERT INTO article_like (like_id,article_id,user_id) VALUES (?,?,?)";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,like_id);
+            stmt.setInt(2,article_id);
+            stmt.setInt(3,user_id);
+
+            stmt.execute();
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 }
