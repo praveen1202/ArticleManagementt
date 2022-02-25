@@ -47,7 +47,7 @@ if($("#session-name").val() === ''){        //if user is not logged in
     $(".log-out").hide();       //temporarily hide logout button,have to remove it
 
 
-//sign-up form ajax request (have to take care of password validation
+        //sign-up form ajax request (have to take care of password validation
 
     $("#form-signup").submit(function (form){
         form.preventDefault();     //prevent the actual submission of form
@@ -74,7 +74,7 @@ if($("#session-name").val() === ''){        //if user is not logged in
         });
     });
 
-//login form request
+        //login form request
     $("#form-login").submit(function (form){
         form.preventDefault();
         $.ajax({     //ajax req for login
@@ -98,18 +98,23 @@ if($("#session-name").val() === ''){        //if user is not logged in
 
 
 
-//log-in toggle button
+        //log-in toggle button
 
     $(".log-button").click(function (){
         $(".sign-up").hide();
         $(".log-in").toggle();
     });
 
-//Sign-up toggle button
+        //Sign-up toggle button
 
     $(".sign-button").click(function (){
         $(".log-in").hide();
         $(".sign-up").toggle();
     });
+}
+else {
+    //have to add logout button
+    $("#form-entry").remove();
+    modifyNavbar();
 }
 

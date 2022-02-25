@@ -22,7 +22,7 @@ $("#create-article").submit(function (form){
         data: $("#create-article").serialize(),
         url:"create-article",
         success: function (){
-            setInterval(redirect,5000);
+            setInterval(redirect,2000);
         }
     });
 });
