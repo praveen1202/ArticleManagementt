@@ -13,6 +13,6 @@ public class LogoutServlet extends HttpServlet{
         HttpSession session = req.getSession();
         session.removeAttribute("name");        //removes attributes and invalidates the session
         session.invalidate();
-        res.sendRedirect("http://localhost:8080/articleManagement/");          //redirects to home page
+        res.sendRedirect("http://localhost:8080/articleManagement/index.jsp");          //redirects to home page
     }
 }
