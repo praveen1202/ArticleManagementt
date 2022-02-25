@@ -4,8 +4,10 @@ import java.io.*;
 import java.util.regex.*;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
+@WebServlet(name = "readArticleId",value="/JSP/articleid/*")
 public class ArticleIdServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException, ServletException {

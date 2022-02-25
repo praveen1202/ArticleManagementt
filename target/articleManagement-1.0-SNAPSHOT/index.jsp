@@ -28,10 +28,10 @@
                 <li class="nav-item create-article">
                     <a class="nav-link log-button" href="JSP/create-article.jsp">Create Article</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item log">
                     <a class="nav-link log-button" href="#">Login</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item sign">
                     <a class="nav-link sign-button" href="#">Sign Up</a>
                 </li>
 
@@ -66,11 +66,6 @@
             </div>
         </div>
 
-        <div class="log-out"> <%-- logout div --%>
-            <form action = "log-out" method = "POST">
-                <input type="submit" value="Log out">
-            </form>
-        </div>
 
         <div class="show"></div>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

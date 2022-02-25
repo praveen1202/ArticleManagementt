@@ -30,7 +30,7 @@
         </div>
 
         <div class="log-out"> <%-- logout div --%>
-            <form action = "log-out" method = "get">
+            <form action = "log-out">
                 <input type="submit" value="Log out">
             </form>
         </div>

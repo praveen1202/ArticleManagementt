@@ -7,12 +7,12 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name="logOut",value="/log-out")
+@WebServlet(name="logOut",value={"/log-out","/JSP/articleid/log-out","/JSP/log-out"})
 public class LogoutServlet extends HttpServlet{
-    public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException {
+    public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException {
         HttpSession session = req.getSession();
         session.removeAttribute("name");        //removes attributes and invalidates the session
         session.invalidate();
-        res.sendRedirect("index.jsp");          //redirects to home page
+        res.sendRedirect("http://localhost:8080/articleManagement/");          //redirects to home page
     }
 }

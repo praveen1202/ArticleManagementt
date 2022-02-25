@@ -41,7 +41,12 @@ function arrangeArticles(data){
 
 if($("#session-name").val() === ''){        //if user is not logged in
 
+    $(".log-in").hide();
+    $(".sign-up").hide();
+
     $(".log-out").hide();       //temporarily hide logout button,have to remove it
+
+
 //sign-up form ajax request (have to take care of password validation
 
     $("#form-signup").submit(function (form){
@@ -57,17 +62,14 @@ if($("#session-name").val() === ''){        //if user is not logged in
             data: $('#form-signup').serialize(),
             dataType:"json",
             success: function (data){
-                console.log(data);
-                if(data.status === 'success'){
+                if(data.status === 'success') {
                     alert("Signed Up Successfully!");
-                    $("#form-entry").remove();
-                    $(".log-out").show();
+                    modifyNavbar();
                 }
                 else{                                   //have to clear form if the entered data is incorrect
                     alert("Username already exists");
                     $("#form-signup").trigger("reset");
                 }
-
             },
         });
     });
@@ -83,9 +85,7 @@ if($("#session-name").val() === ''){        //if user is not logged in
             success: function (data){
                 if(data.status === 'success'){
                     alert("Logged In Successfully!");
-                    console.log(data);
-                    $("#form-entry").remove();
-                    $(".log-out").show();
+                    modifyNavbar();
                 }
                 else{                               //have to clear form if the entered data is incorrect
                     alert("Incorrect Password/Username");
@@ -96,8 +96,7 @@ if($("#session-name").val() === ''){        //if user is not logged in
     });
 
 
-    $(".log-in").hide();
-    $(".sign-up").hide();
+
 
 //log-in toggle button
 

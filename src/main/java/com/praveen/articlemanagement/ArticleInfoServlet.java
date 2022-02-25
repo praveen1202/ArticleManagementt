@@ -6,7 +6,7 @@ import org.json.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "articleInfo",value = "/article-info")
+@WebServlet(name = "articleInfo",value = "/JSP/articleid/article-info")
 public class ArticleInfoServlet extends HttpServlet{
     public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException {
         PrintWriter out = res.getWriter();
