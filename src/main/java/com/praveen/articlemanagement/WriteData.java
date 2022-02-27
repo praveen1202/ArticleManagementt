@@ -45,9 +45,8 @@ public class WriteData {
         }
     }
 
-    public static void likeArticle(int user_id,int article_id){
+    public static void likeArticle(int user_id,int article_id,int like_id){
         try{
-            int like_id = ReadData.getLikeId(user_id,article_id);
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
             String query = "INSERT INTO article_like (like_id,article_id,user_id) VALUES (?,?,?)";
@@ -56,6 +55,27 @@ public class WriteData {
             stmt.setInt(1,like_id);
             stmt.setInt(2,article_id);
             stmt.setInt(3,user_id);
+
+            stmt.execute();
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    protected static void commentArticle(int user_id,int article_id,String comment_created,String comment_text,int comment_id){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            String query = "INSERT INTO article_comment (user_id,article_id,comment_created,comment_text,comment_id) VALUES (?,?,?,?,?)";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,user_id);
+            stmt.setInt(2,article_id);
+            stmt.setTimestamp(3,Timestamp.valueOf(comment_created));
+            stmt.setString(4,comment_text);
+            stmt.setInt(5,comment_id);
 
             stmt.execute();
 

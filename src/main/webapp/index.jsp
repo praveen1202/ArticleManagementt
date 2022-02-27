@@ -39,7 +39,7 @@
         </div>
     </nav>
         <h2 class="session">${name}</h2>
-        <input id="session-name" type="hidden" value="${name}">         <%--  checks if user is logged in or not and changes js files accordingly  --%>
+        <input id="user-name" type="hidden" value="${name}">         <%--  checks if user is logged in or not and changes js files accordingly  --%>
         <br/>
         <div id="form-entry">       <%--  login and signup forms  --%>
             <div class="sign-up"> <%-- signup div --%>

@@ -224,4 +224,60 @@ public class ReadData {
             throw new Exception();
         }
     }
+
+    protected static int getCommentId(int user_id,int article_id) throws Exception {
+        try{
+            int comment_id = 0;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+
+            String query = "SELECT MAX(comment_id) FROM article_comment WHERE article_id = ? AND user_id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,article_id);
+            stmt.setInt(2,user_id);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                comment_id = rs.getInt(1);
+            }
+            return ++comment_id;
+
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new Exception();
+        }
+    }
+
+    protected static JSONObject getComments(int article_id) throws Exception {
+        try{
+            JSONArray jArray = new JSONArray();
+            JSONObject jObject = new JSONObject();
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+
+            String query = "SELECT user_id,comment_text FROM article_comment WHERE article_id = ? ORDER BY comment_created";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,article_id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                JSONObject data = new JSONObject();
+                data.put("user_name",ReadData.getUserName(rs.getInt(1)));
+                data.put("comment_text",rs.getString(2));
+
+                jArray.put(data);
+            }
+            jObject.put("comments",jArray);
+            return jObject;
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new Exception();
+        }
+    }
 }

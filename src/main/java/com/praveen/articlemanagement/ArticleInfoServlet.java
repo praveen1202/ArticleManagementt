@@ -20,7 +20,8 @@ public class ArticleInfoServlet extends HttpServlet{
             jArray.put(jObject1);
             JSONObject jObject2 = ReadData.getLikeInfo(user_id,article_id);
             jArray.put(jObject2);
-
+            JSONObject jObject3 = ReadData.getComments(article_id);
+            jArray.put(jObject3);
             out.write(jArray.toString());
 
         }

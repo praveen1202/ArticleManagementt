@@ -1,3 +1,32 @@
+//call when page loads
+$.ajax({
+    type:"GET",
+    url:"article-info",             //have to add the servlet
+    data: getArticleId(),
+    dataType: "json",
+    success: function (data){
+        structureArticle(data[0]);
+        updateLike(data[1]);
+        getComments(data[2]);
+        console.log(data);
+    }
+});
+
+
+Date.prototype.today = function () {
+    return this.getFullYear() + "-" + (((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"-"+ ((this.getDate() < 10)?"0":"") + this.getDate();
+}
+
+// For the time now
+Date.prototype.timeNow = function () {
+    return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+}
+
+function getDateTime(){                             //function to get dateTime
+    let x = new Date();
+    return x.today() + " " + x.timeNow();
+}
+
 
 function getArticleId(){        //gets articleId from hidden input tag
     return {
@@ -33,19 +62,20 @@ function updateLike(data){      //updates the page if liked
         $("#like-button span").text("Liked");
     }
 }
-//call when page loads
-$.ajax({
-    type:"GET",
-    url:"article-info",             //have to add the servlet
-    data: getArticleId(),
-    dataType: "json",
-    success: function (data){
-        structureArticle(data[0]);
-        updateLike(data[1]);
-        console.log(data);
-    }
-});
 
+//get comments for particular article
+function getComments(data){
+    let $commentsArr = data.comments;
+    for(let i=0;i<$commentsArr.length;i++){
+        let $comment = $("<p>");
+        let $userName = $("<span>");
+        $userName.append($commentsArr[i].user_name + " : ");
+        $comment.append($userName);
+        $comment.append($commentsArr[i].comment_text);
+
+        $("#comments").append($comment);
+    }
+}
 //like - button
 $("#like-button").click(function (){
     $("#like").toggleClass("bi-hand-thumbs-up bi-hand-thumbs-up-fill");
@@ -60,4 +90,38 @@ $("#like-button").click(function (){
     else {
         $("#like-button span").text("Like");
     }
+});
+
+//comments
+$("#user-comment").keypress(function (event){
+    let $userComment = $("#user-comment");
+    if(event.keyCode == 13){            //keycode 13 is enter
+        if($userComment.val() === ""){
+            alert("Empty comment! Please Try Again");
+        }
+        else{
+            let $details = getArticleId();
+
+            $details["user_comment"]=$userComment.val();
+            $details["comment_created"]= getDateTime();
+            console.log($details);
+            let $ajax = $.ajax({
+                type:"POST",
+                url:"article-comment",
+                data: $details
+            });
+
+            $ajax.done(function (){
+                let $comment = $("<p>");
+                let $userName = $("<span>");
+                $userName.append($("#user-name").val() + " : ");
+                $comment.append($userName);
+                $comment.append($userComment.val());
+
+                $("#comments").append($comment);
+                $userComment.trigger("reset");
+            });
+        }
+    }
+
 });

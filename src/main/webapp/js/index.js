@@ -39,7 +39,7 @@ function arrangeArticles(data){
 
 
 
-if($("#session-name").val() === ''){        //if user is not logged in
+if($("#user-name").val() === ''){        //if user is not logged in
 
     $(".log-in").hide();
     $(".sign-up").hide();

@@ -22,7 +22,7 @@
                 response.sendRedirect("http://localhost:8080/articleManagement/index.jsp");
             }
         %>
-        <input id="session-name" type="hidden" value="${name}">
+        <input id="user-name" type="hidden" value="${name}">
         <input id="article-id" type="hidden" name="article_id" value="${article_id}" >
         <input id="user-id" type="hidden" name="user-id" value="${user_id}">
         <%--  Navbar Section   --%>
@@ -38,10 +38,10 @@
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Under Construction</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="http://localhost:8080/articleManagement/index.jsp">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item create-article">
-                        <a class="nav-link log-button" href="../JSP/create-article.jsp">Create Article</a>
+                        <a class="nav-link log-button" href="../create-article.jsp">Create Article</a>
                     </li>
                     <li class="nav-item"><form class="form-inline logout nav-form" action="log-out">
                         <input class="nav-input btn btn-outline" type="submit" value="Log Out">
@@ -59,6 +59,10 @@
                 <i class="bi bi-chat"></i> Comment
             </button>
         </div>
+        <div id="comments">
+
+        </div>
+        <label>${name} : <input type="text" name="user-comment" id="user-comment"></label>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
