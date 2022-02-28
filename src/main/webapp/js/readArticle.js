@@ -8,6 +8,7 @@ $.ajax({
         structureArticle(data[0]);
         updateLike(data[1]);
         getComments(data[2]);
+        setLikes(data[3]);
         console.log(data);
     }
 });
@@ -75,6 +76,24 @@ function getComments(data){
 
         $("#comments").append($comment);
     }
+}
+
+//sets no.of likes of particular article
+function setLikes(data){
+    let $likeTag = $("<span>");
+    if($("#like").hasClass("bi-hand-thumbs-up-fill")){
+        let $likesCount = parseInt(data.likes)-1;
+        if($likesCount != 0){
+            $likeTag.append($likesCount + " others like this");
+        }
+    }
+    else{
+        let $likesCount = parseInt(data.likes);
+        if($likesCount != 0){
+            $likeTag.append($likesCount + " others like this");
+        }
+    }
+    $("#user-activities").append($likeTag);
 }
 //like - button
 $("#like-button").click(function (){

@@ -6,8 +6,8 @@ public class WriteData {
     public static void signUp(String username,String password,String email) throws Exception{    //signs up the user
         try {
 //            System.out.println(username + " " + password);
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            Connection con = DatabaseConnection.initializeDatabase();
+            
             String query = "INSERT INTO user (username,password,email_id,premium) VALUES (?,?,?,'NO')";
             PreparedStatement stmt = con.prepareStatement(query);
 
@@ -15,6 +15,8 @@ public class WriteData {
             stmt.setString(2,password);
             stmt.setString(3,email);
             stmt.execute();
+            con.close();
+
         }
         catch (Exception e){
             System.out.println(e);
@@ -26,8 +28,8 @@ public class WriteData {
         try{
             int article_id = ReadData.getArticleId();
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            Connection con = DatabaseConnection.initializeDatabase();
+            
             String query = "INSERT INTO articles (article_id, content, created, user_id,type) VALUES (?,?,?,?,?)";
 
             PreparedStatement stmt = con.prepareStatement(query);
@@ -38,6 +40,7 @@ public class WriteData {
             stmt.setString(5,type);
             stmt.execute();
 
+            con.close();
 
         } catch (Exception e){
             System.out.println(e);
@@ -47,8 +50,8 @@ public class WriteData {
 
     public static void likeArticle(int user_id,int article_id,int like_id){
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            Connection con = DatabaseConnection.initializeDatabase();
+            
             String query = "INSERT INTO article_like (like_id,article_id,user_id) VALUES (?,?,?)";
 
             PreparedStatement stmt = con.prepareStatement(query);
@@ -57,6 +60,9 @@ public class WriteData {
             stmt.setInt(3,user_id);
 
             stmt.execute();
+            con.close();
+
+            WriteData.updateLike(article_id);
 
         }
         catch (Exception e){
@@ -66,8 +72,8 @@ public class WriteData {
 
     protected static void commentArticle(int user_id,int article_id,String comment_created,String comment_text,int comment_id){
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            Connection con = DatabaseConnection.initializeDatabase();
+            
             String query = "INSERT INTO article_comment (user_id,article_id,comment_created,comment_text,comment_id) VALUES (?,?,?,?,?)";
 
             PreparedStatement stmt = con.prepareStatement(query);
@@ -78,6 +84,25 @@ public class WriteData {
             stmt.setInt(5,comment_id);
 
             stmt.execute();
+            con.close();
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    protected static void updateLike(int article_id){
+        try{
+            Connection con = DatabaseConnection.initializeDatabase();
+            
+            String query = "UPDATE articles SET likes = likes + 1 WHERE article_id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,article_id);
+
+            stmt.execute();
+            con.close();
 
         }
         catch (Exception e){

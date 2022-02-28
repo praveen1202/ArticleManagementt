@@ -9,8 +9,7 @@ public class ReadData {
             int article_id,views,user_id;
             String content,created,username;
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            Connection con = DatabaseConnection.initializeDatabase();
 
             String query = "SELECT article_id,content,views,user_id,created FROM articles WHERE type='FREE' ORDER BY created DESC LIMIT 5";
             PreparedStatement stmt = con.prepareStatement(query);
@@ -39,6 +38,7 @@ public class ReadData {
                 
                 jArray.put(jObject);
             }
+            con.close();
             return jArray;
         }
         catch (Exception e){
@@ -53,8 +53,7 @@ public class ReadData {
             String premium;
             JSONObject jObject = new JSONObject();
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            Connection con = DatabaseConnection.initializeDatabase();
             String query = "SELECT user_id,premium FROM user WHERE username = ? AND password = ?";
 
             PreparedStatement stmt = con.prepareStatement(query);
@@ -69,6 +68,7 @@ public class ReadData {
                 jObject.put("user_id",user_id);
                 jObject.put("premium",premium);
             }
+            con.close();
             return jObject;
 
         }
@@ -81,8 +81,9 @@ public class ReadData {
     public static int getArticleId() throws Exception {     //function to get the highest article_id so that it is unique from others
         try{
             int article_id = 0;
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+
+            Connection con = DatabaseConnection.initializeDatabase();
+            
             String query = "SELECT MAX(article_id) FROM articles";
 
             PreparedStatement stmt = con.prepareStatement(query);
@@ -91,6 +92,7 @@ public class ReadData {
             if(rs.next()){
                 article_id = rs.getInt(1);
             }
+            con.close();
             return ++article_id;
         }
         catch (Exception e) {
@@ -102,8 +104,8 @@ public class ReadData {
 
     public static boolean searchArticle(int article_id){
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            Connection con = DatabaseConnection.initializeDatabase();
+            
             String query = "SELECT article_id FROM articles WHERE article_id = ?";
 
             PreparedStatement stmt = con.prepareStatement(query);
@@ -111,7 +113,12 @@ public class ReadData {
 
             ResultSet rs = stmt.executeQuery();
 
-            return rs.next();
+            if(rs.next()){
+                con.close();
+                return true;
+            }
+            con.close();
+            return false;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -123,8 +130,8 @@ public class ReadData {
         try{
             JSONObject jObject = new JSONObject();
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            Connection con = DatabaseConnection.initializeDatabase();
+            
             String query = "SELECT content,views,user_id,created FROM articles WHERE article_id = ?";
 
             PreparedStatement stmt = con.prepareStatement(query);
@@ -140,6 +147,7 @@ public class ReadData {
                 jObject.put("user_name",ReadData.getUserName(rs.getInt(3)));
                 jObject.put("created",rs.getString(4));
             }
+            con.close();
             return jObject;
         }
         catch (Exception e){
@@ -151,8 +159,9 @@ public class ReadData {
     public static String getUserName(int user_id) throws Exception {
         try {
             String username;
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+
+            Connection con = DatabaseConnection.initializeDatabase();
+            
             String query = "SELECT username FROM user WHERE user_id = ?";
 
             PreparedStatement stmt = con.prepareStatement(query);
@@ -165,6 +174,7 @@ public class ReadData {
             else {
                 throw new Exception();
             }
+            con.close();
             return username;
         }
         catch (Exception e){
@@ -176,8 +186,8 @@ public class ReadData {
     protected static int getLikeId(int article_id) throws Exception {
         try{
             int like_id = 0;
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+
+            Connection con = DatabaseConnection.initializeDatabase();
 
             String query = "SELECT MAX(like_id) FROM article_like WHERE article_id = ?";
 
@@ -188,6 +198,7 @@ public class ReadData {
             if(rs.next()){
                 like_id = rs.getInt(1);
             }
+            con.close();
             return ++like_id;
 
         } catch (Exception e){
@@ -199,8 +210,8 @@ public class ReadData {
     protected static JSONObject getLikeInfo(int user_id,int article_id) throws Exception {
         try{
             JSONObject jObject = new JSONObject();
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+
+            Connection con = DatabaseConnection.initializeDatabase();
 
             String query = "SELECT like_id FROM article_like WHERE user_id = ? AND article_id = ?";
 
@@ -216,6 +227,7 @@ public class ReadData {
             else{
                 jObject.put("liked","no");
             }
+            con.close();
             return jObject;
         }
         catch (Exception e){
@@ -227,8 +239,8 @@ public class ReadData {
     protected static int getCommentId(int user_id,int article_id) throws Exception {
         try{
             int comment_id = 0;
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+
+            Connection con = DatabaseConnection.initializeDatabase();
 
             String query = "SELECT MAX(comment_id) FROM article_comment WHERE article_id = ? AND user_id = ?";
 
@@ -240,6 +252,7 @@ public class ReadData {
             if(rs.next()){
                 comment_id = rs.getInt(1);
             }
+            con.close();
             return ++comment_id;
 
         } catch (Exception e){
@@ -253,8 +266,7 @@ public class ReadData {
             JSONArray jArray = new JSONArray();
             JSONObject jObject = new JSONObject();
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
+            Connection con = DatabaseConnection.initializeDatabase();
 
             String query = "SELECT user_id,comment_text FROM article_comment WHERE article_id = ? ORDER BY comment_created";
 
@@ -270,9 +282,35 @@ public class ReadData {
 
                 jArray.put(data);
             }
+            con.close();
             jObject.put("comments",jArray);
             return jObject;
 
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new Exception();
+        }
+    }
+
+    protected static JSONObject getLikes(int article_id) throws Exception {
+        try{
+            JSONObject jObject = new JSONObject();
+
+            Connection con = DatabaseConnection.initializeDatabase();
+
+
+            String query = "SELECT likes FROM articles WHERE article_id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,article_id);
+
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                jObject.put("likes",rs.getInt(1));
+            }
+            con.close();
+            return jObject;
         }
         catch (Exception e){
             e.printStackTrace();

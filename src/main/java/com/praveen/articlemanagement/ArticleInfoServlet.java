@@ -16,12 +16,15 @@ public class ArticleInfoServlet extends HttpServlet{
 
             JSONArray jArray = new JSONArray();
 
-            JSONObject jObject1 = ReadData.getArticle(article_id);
-            jArray.put(jObject1);
-            JSONObject jObject2 = ReadData.getLikeInfo(user_id,article_id);
-            jArray.put(jObject2);
-            JSONObject jObject3 = ReadData.getComments(article_id);
-            jArray.put(jObject3);
+            JSONObject article = ReadData.getArticle(article_id);
+            jArray.put(article);
+            JSONObject likeInfo = ReadData.getLikeInfo(user_id,article_id);
+            jArray.put(likeInfo);
+            JSONObject comments = ReadData.getComments(article_id);
+            jArray.put(comments);
+            JSONObject likes = ReadData.getLikes(article_id);
+            jArray.put(likes);
+
             out.write(jArray.toString());
 
         }

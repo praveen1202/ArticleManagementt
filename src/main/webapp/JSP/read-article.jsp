@@ -58,6 +58,7 @@
             <button type="button" class="btn btn-white">
                 <i class="bi bi-chat"></i> Comment
             </button>
+            <br/>
         </div>
         <div id="comments">
 
