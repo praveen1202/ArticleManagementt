@@ -173,17 +173,16 @@ public class ReadData {
         }
     }
 
-    protected static int getLikeId(int user_id,int article_id) throws Exception {
+    protected static int getLikeId(int article_id) throws Exception {
         try{
             int like_id = 0;
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/articleManagement", "sample", "sample");
 
-            String query = "SELECT MAX(like_id) FROM article_like WHERE article_id = ? AND user_id = ?";
+            String query = "SELECT MAX(like_id) FROM article_like WHERE article_id = ?";
 
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setInt(1,article_id);
-            stmt.setInt(2,user_id);
 
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){

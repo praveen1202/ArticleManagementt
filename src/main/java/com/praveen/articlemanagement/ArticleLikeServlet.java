@@ -11,7 +11,7 @@ public class ArticleLikeServlet extends HttpServlet{
         try {
             int user_id = Integer.parseInt(req.getParameter("user_id"));
             int article_id = Integer.parseInt(req.getParameter("article_id"));
-            int like_id = ReadData.getLikeId(user_id,article_id);
+            int like_id = ReadData.getLikeId(article_id);
 
             WriteData.likeArticle(user_id,article_id,like_id);
         } catch (Exception e){
