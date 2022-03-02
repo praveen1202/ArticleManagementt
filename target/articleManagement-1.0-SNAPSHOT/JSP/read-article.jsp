@@ -55,15 +55,19 @@
             <button type="button" class="btn btn-white" id="like-button">
                 <i class="bi bi-hand-thumbs-up" id="like"></i><span>Like</span>
             </button>
-            <button type="button" class="btn btn-white">
+            <button type="button" class="btn btn-white" id="comment-button">
                 <i class="bi bi-chat"></i> Comment
             </button>
             <br/>
         </div>
-        <div id="comments">
+        <div id="comments-all">
+            <div id="comments">
 
+            </div>
+            <p><label>${name} : <input type="text" name="user-comment" id="user-comment"></label></p>
         </div>
-        <label>${name} : <input type="text" name="user-comment" id="user-comment"></label>
+
+
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>

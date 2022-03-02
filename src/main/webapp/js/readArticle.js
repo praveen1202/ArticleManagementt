@@ -13,6 +13,7 @@ $.ajax({
     }
 });
 
+$("#comments-all").hide();
 
 Date.prototype.today = function () {
     return this.getFullYear() + "-" + (((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"-"+ ((this.getDate() < 10)?"0":"") + this.getDate();
@@ -81,17 +82,9 @@ function getComments(data){
 //sets no.of likes of particular article
 function setLikes(data){
     let $likeTag = $("<span>");
-    if($("#like").hasClass("bi-hand-thumbs-up-fill")){
-        let $likesCount = parseInt(data.likes)-1;
-        if($likesCount != 0){
-            $likeTag.append($likesCount + " others like this");
-        }
-    }
-    else{
-        let $likesCount = parseInt(data.likes);
-        if($likesCount != 0){
-            $likeTag.append($likesCount + " others like this");
-        }
+    let $likesCount = parseInt(data.likes);
+    if($likesCount != 0){
+        $likeTag.append($likesCount + " people like this");
     }
     $("#user-activities").append($likeTag);
 }
@@ -144,3 +137,8 @@ $("#user-comment").keypress(function (event){
     }
 
 });
+
+$("#comment-button").click(function (){
+   $("#comments-all").slideToggle();
+});
+

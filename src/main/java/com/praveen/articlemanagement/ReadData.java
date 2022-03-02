@@ -268,7 +268,7 @@ public class ReadData {
 
             Connection con = DatabaseConnection.initializeDatabase();
 
-            String query = "SELECT user_id,comment_text FROM article_comment WHERE article_id = ? ORDER BY comment_created";
+            String query = "SELECT user_id,comment_text FROM article_comment WHERE article_id = ? ORDER BY comment_created LIMIT 10";
 
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setInt(1,article_id);

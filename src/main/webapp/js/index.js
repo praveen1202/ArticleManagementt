@@ -13,7 +13,7 @@ function arrangeArticles(data){
         let $articleId = String(data[iter].article_id);
         let $div = $("<div>");
         $div.attr("id","article" + $articleId);
-
+        $div.attr("class","col-10")
         let $href = $("<a>");
         $($href).attr("href","JSP/articleid/"+$articleId);
 

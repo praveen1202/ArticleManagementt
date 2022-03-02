@@ -35,26 +35,23 @@
                 </ul>
             </div>
         </nav>
-        <div class="article-content">
-            <form method="post" id="create-article">     <%--form for create article--%>
-                <h3>Title :</h3>
-                <label><input type="text" name="title" /><br/></label>
-                <label for="create-content">Write Your Thoughts: </label>
-                <textarea name="content" id="create-content" rows="10" cols="40"></textarea>
-
-                <label>Premium Content:</label>
-                <label>Yes<input type="radio" name="premium" value="YES"></label>
-                <label>No<input type="radio" name="premium" value="NO" checked></label>
-                <input type="hidden" name="created" id="date-time">
-                <input type="submit">
-            </form>
+        <div class="article-content row justify-content-center">
+            <div class="col-md-auto">
+                <form method="post" id="create-article">     <%--form for create article--%>
+                    <h3>Title :</h3>
+                    <label><input type="text" name="title" /></label><br/>
+                    <label for="create-content">Write Your Thoughts: </label><br/>
+                    <textarea name="content" id="create-content" rows="20" cols="80"></textarea><br/>
+                    <label>Premium Content:</label>
+                    <label>Yes<input type="radio" name="premium" value="YES"></label>
+                    <label>No<input type="radio" name="premium" value="NO" checked></label>
+                    <br/>
+                    <input type="hidden" name="created" id="date-time">
+                    <input type="submit" class="btn btn-primary">
+                </form>
+            </div>
         </div>
 
-        <div class="log-out"> <%-- logout div --%>
-            <form action = "log-out">
-                <input type="submit" value="Log out">
-            </form>
-        </div>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
