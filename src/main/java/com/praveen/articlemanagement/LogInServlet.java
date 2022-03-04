@@ -11,11 +11,13 @@ import jakarta.servlet.annotation.*;
 public class LogInServlet extends HttpServlet{
     public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException {
 
-        String username = req.getParameter("log-username");
-        String password = req.getParameter("log-password");
-        PrintWriter out = res.getWriter();
         JSONObject jObject = new JSONObject();
+        PrintWriter out = res.getWriter();
+
         try{
+            String username = req.getParameter("log-username");
+            String password = req.getParameter("log-password");
+
 
             jObject = ReadData.searchUser(username,password);         //searches if username and password matches in the database
 

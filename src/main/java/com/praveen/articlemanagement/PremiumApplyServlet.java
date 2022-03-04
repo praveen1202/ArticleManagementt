@@ -5,8 +5,9 @@ import jakarta.servlet.http.*;
 import org.json.JSONObject;
 
 @WebServlet(name = "getPremium",value={"/apply-premium","/JSP/articleid/apply-premium","/JSP/apply-premium"})
-public class PremiumServlet extends HttpServlet{
+public class PremiumApplyServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req,HttpServletResponse res){
+
         JSONObject jObject = new JSONObject();
         try{
             HttpSession session = req.getSession();

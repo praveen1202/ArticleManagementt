@@ -5,8 +5,54 @@ $.ajax({        //ajax for content-load(latest)
     success: function (data){
         console.log(data);
         arrangeArticles(data);
+        checkPremium();
     }
 });
+
+function checkPremium(){        //sends req to check if the user is premium user
+    if($("#user-name").val() !== ""){
+        $.ajax({
+            type:"GET",
+            url:"check-premium",
+            dataType:"json",
+            success:function(data){
+                if(data.premium === "YES"){
+                    applyPremium();
+                }
+            }
+
+        });
+    }
+}
+
+function applyPremium(){
+    let $onlyPremiumTag = $("<a>",{"id":"only-premium","class":"btn btn-outline-dark btn-lg","aria-pressed":"false"});
+    $onlyPremiumTag.text("Only Premium")
+    $("#article-category").append($onlyPremiumTag);
+
+    // article-categories (change button color when clicked)
+    $("#most-recent").click(function (){
+        if($("#most-recent").hasClass("btn-dark")){
+
+        }
+        else{
+            $("#most-recent").toggleClass("btn-dark active btn-outline-dark");
+            $onlyPremiumTag.toggleClass("btn-outline-dark active btn-dark");
+        }
+
+    });
+    $onlyPremiumTag.click(function (){
+        if($onlyPremiumTag.hasClass("btn-dark")){
+
+        }
+        else{
+            $onlyPremiumTag.toggleClass("btn-dark active btn-outline-dark");
+            $("#most-recent").toggleClass("btn-outline-dark active btn-dark");
+        }
+
+
+    });
+}
 
 function arrangeArticles(data){
     for(let iter = 0; iter < data.length; iter++){     //adds content dynamically to the page
@@ -117,4 +163,6 @@ else {
     $("#form-entry").remove();
     modifyNavbar();
 }
+
+
 

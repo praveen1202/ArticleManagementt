@@ -38,6 +38,9 @@
             </ul>
         </div>
     </nav>
+    <div id="article-category">
+        <a href="#" id="most-recent" class="btn-lg btn btn-dark active" role="button" aria-pressed="true">Most Recent</a>
+    </div>
 <%--        <h2 class="session">${name}</h2>--%>
         <input id="user-name" type="hidden" value="${name}">         <%--  checks if user is logged in or not and changes js files accordingly  --%>
         <br/>

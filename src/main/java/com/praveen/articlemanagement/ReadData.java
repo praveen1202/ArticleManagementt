@@ -317,4 +317,28 @@ public class ReadData {
             throw new Exception();
         }
     }
+
+    protected static String checkPremium(int user_id) throws Exception {
+        try{
+            String premium = new String();
+            Connection con = DatabaseConnection.initializeDatabase();
+
+            String query = "SELECT premium FROM user WHERE user_id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,user_id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                premium = rs.getString(1);
+            }
+            con.close();
+            return premium;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new Exception();
+        }
+    }
 }
