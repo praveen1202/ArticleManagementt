@@ -110,5 +110,22 @@ public class WriteData {
         }
     }
 
+    protected static void applyPremium(int user_id) throws Exception {
+        try{
+            Connection con = DatabaseConnection.initializeDatabase();
+
+            String query = "UPDATE user SET premium = 'YES' WHERE user_id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,user_id);
+
+            stmt.execute();
+            con.close();
+        }
+        catch (Exception e){
+            throw new Exception();
+        }
+    }
+
 
 }

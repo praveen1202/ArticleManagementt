@@ -2,7 +2,6 @@ package com.praveen.articlemanagement;
 
 import java.io.*;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
