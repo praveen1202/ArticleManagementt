@@ -9,7 +9,9 @@ import jakarta.servlet.http.*;
 public class ArticleLikeServlet extends HttpServlet{
     public void doGet(HttpServletRequest req,HttpServletResponse res){
         try {
-            int user_id = Integer.parseInt(req.getParameter("user_id"));
+            HttpSession session = req.getSession();
+            int user_id = Integer.parseInt(session.getAttribute("user_id").toString());
+
             int article_id = Integer.parseInt(req.getParameter("article_id"));
             int like_id = ReadData.getLikeId(article_id);
 

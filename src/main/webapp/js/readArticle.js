@@ -32,8 +32,7 @@ function getDateTime(){                             //function to get dateTime
 
 function getArticleId(){        //gets articleId from hidden input tag
     return {
-        "article_id": $("#article-id").val(),
-        "user_id":$("#user-id").val()
+        "article_id": $("#article-id").val()
     };
 }
 function structureArticle(data){

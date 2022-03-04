@@ -24,7 +24,6 @@
         %>
         <input id="user-name" type="hidden" value="${name}">
         <input id="article-id" type="hidden" name="article_id" value="${article_id}" >
-        <input id="user-id" type="hidden" name="user-id" value="${user_id}">
         <%--  Navbar Section   --%>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">Articless</a>

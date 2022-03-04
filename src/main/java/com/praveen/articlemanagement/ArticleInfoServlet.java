@@ -11,8 +11,10 @@ public class ArticleInfoServlet extends HttpServlet{
     public void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException {
         PrintWriter out = res.getWriter();
         try {
+            HttpSession session = req.getSession();
+            int user_id = Integer.parseInt(session.getAttribute("user_id").toString());
             int article_id = Integer.parseInt(req.getParameter("article_id"));
-            int user_id = Integer.parseInt(req.getParameter("user_id"));
+
 
             JSONArray jArray = new JSONArray();
 

@@ -9,7 +9,9 @@ import jakarta.servlet.http.*;
 public class ArticleCommentServlet extends HttpServlet{
     public void doPost(HttpServletRequest req,HttpServletResponse res){
         try{
-            int user_id = Integer.parseInt(req.getParameter("user_id"));
+            HttpSession session = req.getSession();
+            int user_id = Integer.parseInt(session.getAttribute("user_id").toString());
+
             int article_id = Integer.parseInt(req.getParameter("article_id"));
             String comment_created = req.getParameter("comment_created");
             String user_comment = req.getParameter("user_comment");
